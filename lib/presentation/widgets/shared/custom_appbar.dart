@@ -1,13 +1,9 @@
-// TODO: 1. Crear AppBar - Sebastian
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:cinemapedia_movil/domain/entities/movie.dart';
-
-import 'package:cinemapedia_movil/presentation/delegates/search_movie_delegate.dart';
-import 'package:cinemapedia_movil/presentation/providers/providers.dart';
+import 'package:cinemapedia_movil/presentation/delegates/search_movies_delegate.dart';
 
 class CustomAppbar extends ConsumerWidget {
   const CustomAppbar({super.key});
@@ -30,7 +26,8 @@ class CustomAppbar extends ConsumerWidget {
                 Text('Cinemapedia', style: titleStyle),
                 const Spacer(),
                 IconButton(
-                    onPressed: () {
+                    onPressed: () {},
+                    /* onPressed: () {
                       final searchedMovies = ref.read(searchedMoviesProvider);
                       final searchQuery = ref.read(searchQueryProvider);
 
@@ -47,7 +44,7 @@ class CustomAppbar extends ConsumerWidget {
 
                         context.push('/home/0/movie/${movie.id}');
                       });
-                    },
+                    }, */
                     icon: const Icon(Icons.search))
               ],
             ),
