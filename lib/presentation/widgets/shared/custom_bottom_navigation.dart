@@ -1,5 +1,3 @@
-// TODO: 4. Crear bottom navigation bar - Sebastian
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

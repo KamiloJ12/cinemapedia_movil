@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:cinemapedia_movil/domain/entities/movie.dart';
-import 'package:cinemapedia_movil/presentation/providers/movies/movies_provider.dart';
+import 'package:cinemapedia_movil/presentation/providers/movies/movies_providers.dart';
 
 final moviesSlidesShowProvider = Provider<List<Movie>>((ref) {
   final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
