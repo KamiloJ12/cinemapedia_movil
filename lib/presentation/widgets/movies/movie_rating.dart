@@ -1,5 +1,6 @@
-import 'package:cinemapedia/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
+
+import 'package:cinemapedia_movil/config/helpers/human_formats.dart';
 
 class MovieRating extends StatelessWidget {
 

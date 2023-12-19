@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:cinemapedia/presentation/providers/providers.dart';
-import 'package:cinemapedia/domain/entities/entities.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+
+import 'package:cinemapedia_movil/presentation/providers/providers.dart';
+import 'package:cinemapedia_movil/domain/entities/entities.dart';
 
 
 final FutureProviderFamily<List<Video>, int> videosFromMovieProvider = FutureProvider.family((ref, int movieId) {

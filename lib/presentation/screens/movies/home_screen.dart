@@ -1,59 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'package:cinemapedia_movil/presentation/providers/providers.dart';
 import 'package:cinemapedia_movil/presentation/widgets/widgets.dart';
+import 'package:cinemapedia_movil/presentation/views/views.dart';
 
-class HomeScreen extends StatelessWidget {
-  static const name = 'home-scren';
-  const HomeScreen({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: _HomeView(),
-      bottomNavigationBar: CustomBottomNavigation(currentIndex: 0),
-    );
-  }
-}
+class HomeScreen extends StatefulWidget {
 
-class _HomeView extends ConsumerStatefulWidget {
-  const _HomeView();
+  static const name = 'home-screen';
+  final int pageIndex;
+
+  const HomeScreen({
+    super.key, 
+    required this.pageIndex
+  });
 
   @override
-  ConsumerState<_HomeView> createState() => _HomeViewState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeViewState extends ConsumerState<_HomeView> {
+//* Este Mixin es necesario para mantener el estado en el PageView
+class _HomeScreenState extends State<HomeScreen> with AutomaticKeepAliveClientMixin {
+
+  late PageController pageController;
+
   @override
   void initState() {
     super.initState();
-    ref.read(nowPlayingMoviesProvider.notifier).loadNextPage();
+    pageController = PageController(
+      keepPage: true
+    );
   }
 
   @override
-  Widget build(BuildContext context) {
-    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
-    final slideShowMovies = ref.watch(moviesSlidesShowProvider);
-
-    return CustomScrollView(slivers: [
-      const SliverAppBar(
-        floating: true,
-        flexibleSpace: FlexibleSpaceBar(
-          title: CustomAppbar(),
-        ),
-      ),
-      SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-        return Column(children: [
-          MoviesSlideshow(movies: slideShowMovies),
-          MovieHorizontalListview(
-            movies: nowPlayingMovies,
-            title: 'En cines',
-            subTitle: 'Lunes 4',
-            loadNextPage: () => ref.read(nowPlayingMoviesProvider),
-          ),
-        ]);
-      }))
-    ]);
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
+
+  final viewRoutes =  const <Widget>[
+    HomeView(),
+    PopularView(), // <--- categorias View
+    FavoritesView(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    if ( pageController.hasClients ) {
+      pageController.animateToPage(
+        widget.pageIndex, 
+        curve: Curves.easeInOut, 
+        duration: const Duration( milliseconds: 250),
+      );
+    }
+
+    return Scaffold(
+      body: PageView(
+        //* Esto evitará que rebote 
+        physics: const NeverScrollableScrollPhysics(),
+        controller: pageController,
+        // index: pageIndex,
+        children: viewRoutes,
+      ),
+      bottomNavigationBar: CustomBottomNavigation( 
+        currentIndex: widget.pageIndex,
+      ),
+    );
+  }
+  
+  @override
+  bool get wantKeepAlive => true;
 }

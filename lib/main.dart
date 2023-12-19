@@ -5,8 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cinemapedia_movil/config/router/app_router.dart';
 import 'package:cinemapedia_movil/config/theme/app_theme.dart';
 
+
 Future<void> main() async {
-  await dotenv.load(fileName: '.env');
+  await dotenv.load(
+    fileName: ".env"
+  );
   runApp(
     const ProviderScope(child: MainApp())
   );

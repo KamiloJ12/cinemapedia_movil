@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:animate_do/animate_do.dart';
 
-import 'package:cinemapedia/presentation/providers/providers.dart';
-
-
+import 'package:cinemapedia_movil/presentation/providers/providers.dart';
 
 class ActorsByMovie extends ConsumerWidget {
 
