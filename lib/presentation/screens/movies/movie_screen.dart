@@ -28,10 +28,8 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
   @override
   void initState() {
     super.initState();
-    
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
     ref.read(actorsByMovieProvider.notifier).loadActors(widget.movieId);
-
   }
 
   @override
@@ -70,7 +68,6 @@ class _MovieDetails extends StatelessWidget {
 
     final size = MediaQuery.of(context).size;
     final textStyles = Theme.of(context).textTheme;
-
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
